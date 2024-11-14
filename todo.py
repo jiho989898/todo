@@ -49,10 +49,12 @@ async def delete_todo() -> dict:
     
 
 @todo_router.delete("/todo/{todo_id}")
-async def update_todo(todo_id: int = Path(..., title="변경할 아이템의 ID")) -> dict:
-    todo_list.pop(todo_id)
-    if todo_list:
-        return{
-            "message": "todo가 성공적으로 삭제 완료"
-        }
-
+async def delete_single_todo(todo_id: int) -> dict:
+    for index in range(len(todo_list)):
+        todo = todo_list[index]
+        if todo.id == todo_id:
+            todo_list.pop(index)
+            return { "message": "삭제되었습니다"}
+    return {
+        "message": "존재하지 않는 id 입니다"
+    }
