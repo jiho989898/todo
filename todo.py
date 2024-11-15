@@ -2,8 +2,12 @@ from fastapi import APIRouter, Path, HTTPException,status
 from model import Todo, todoItem, TodoItems
 
 todo_router = APIRouter()
+
+#DB 없는 상태에서 딕셔너리 내에 id, item을 저장하기 위한 리스트
 todo_list = []
 
+
+#item 추가(POST)
 @todo_router.post("/todo", status_code=201)
 async def add_todo(todo:Todo) -> dict:
     todo_list.append(todo)
@@ -16,7 +20,7 @@ async def add_todo(todo:Todo) -> dict:
 @todo_router.get("/todo")
 async def retrieve_todos() -> dict:
     return {
-        "todo" : todo_list
+        "todo": todo_list
     }
 
 @todo_router.get("/todo/{todo_id}")
