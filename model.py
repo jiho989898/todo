@@ -1,9 +1,17 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
+from fastapi import Form
 
 class Todo(BaseModel):
-    id: int
+    id: Optional[int] = None
     item: str
+
+    @classmethod
+    def as_form(
+        cls,
+        item: str = Form(...)
+    ):
+        return cls(item=item)
 
     class Config:
         json_schema_extra = {
@@ -29,7 +37,7 @@ class TodoItems(BaseModel):
     class Config:
         schema_extra = {
                 "example": {
-                    "beomtaeks": [
+                    "todos": [  # 여기서 "beomtaeks" -> "todos"로 수정
                         {
                             "item": "Example schema 1"
                         },
