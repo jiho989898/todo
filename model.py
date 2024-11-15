@@ -9,30 +9,27 @@ class Todo(BaseModel):
         json_schema_extra = {
                 "example": {
                     "id": 1,
-                    "item": "첫번째 아이템"
+                    "item": "Example Schema"
                 }
         }
 
-
-#todo의 item을 변경하기 위한 모델
-
-class todoItem(BaseModel):
+class TodoItem(BaseModel):
     item: str
+
     class Config:
         json_schema_extra = {
                 "example": {
-                    "item": "변경할 아이템 작성"
+                    "item": "TEST TEST"
                 }
         }
 
-#todo_list의 item만 리턴하기 위한 모델
 class TodoItems(BaseModel):
-    todos: List[todoItem]
+    todos: List[TodoItem]
 
     class Config:
         schema_extra = {
                 "example": {
-                    "todos": [
+                    "beomtaeks": [
                         {
                             "item": "Example schema 1"
                         },
